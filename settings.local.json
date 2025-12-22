@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(rg:*)",
+      "Bash(tail:*)",
+      "Bash(zellij setup:*)",
+      "Glob(**)",
+      "Read(**)",
+      "WebFetch(domain:*)",
+      "mcp__sequential-thinking__sequentialthinking",
+      "mcp__serena__find_file",
+      "mcp__serena__search_for_pattern",
+      "Bash(for file in BUSINESS_PANEL_EXAMPLES.md BUSINESS_SYMBOLS.md FLAGS.md PRINCIPLES.md RULES.md MODE_Brainstorming.md MODE_Business_Panel.md MODE_Introspection.md MODE_Orchestration.md MODE_Task_Management.md MODE_Token_Efficiency.md MCP_Context7.md MCP_Serena.md MCP_Magic.md MCP_Morphllm.md MCP_Playwright.md MCP_Sequential.md MCP_Tavily.md RESEARCH_CONFIG.md MODE_DeepResearch.md)",
+      "Bash(do test -f ~/.claude/$file)",
+      "Bash(echo:*)",
+      "Bash(done)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

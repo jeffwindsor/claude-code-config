@@ -1,0 +1,26 @@
+# Claude Code session data and caches
+debug/
+todos/
+plans/
+shell-snapshots/
+file-history/
+session-env/
+logs/
+backups/
+projects/
+
+# Sensitive data
+aws_creds_cache.json
+stats-cache.json
+history.jsonl
+
+# Plugins and external tools
+plugins/
+statsig/
+ide/
+
+# macOS
+.DS_Store
+
+# SuperClaude metadata
+.superclaude-metadata.json
