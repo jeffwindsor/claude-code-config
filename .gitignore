@@ -1,13 +1,16 @@
 # Claude Code session data and caches
-debug/
-todos/
-plans/
-shell-snapshots/
-file-history/
-session-env/
-logs/
 backups/
+cache/
+debug/
+file-history/
+logs/
+paste-cache/
+plans/
 projects/
+session-env/
+shell-snapshots/
+tasks/
+todos/
 
 # Sensitive data
 aws_creds_cache.json
@@ -21,6 +24,3 @@ ide/
 
 # macOS
 .DS_Store
-
-# SuperClaude metadata
-.superclaude-metadata.json
