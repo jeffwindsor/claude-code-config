@@ -1,0 +1,41 @@
+{
+  "enabledPlugins": {
+    "context7@claude-plugins-official": true,
+    "feature-dev@claude-plugins-official": true,
+    "code-review@claude-plugins-official": true,
+    "security-guidance@claude-plugins-official": true,
+    "greptile@claude-plugins-official": true,
+    "jdtls-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "beads@beads-marketplace": true
+  },
+  "permissions": {
+    "allow": [
+      "Bash(bat:*)",
+      "Bash(bd:*)",
+      "Bash(cat:*)",
+      "Bash(echo:*)",
+      "Bash(fd:*)",
+      "Bash(find:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(grep:*)",
+      "Bash(head:*)",
+      "Bash(ls:*)",
+      "Bash(mvn:*)",
+      "Bash(rg:*)",
+      "Bash(sed:*)",
+      "Bash(specify check:*)",
+      "Bash(specify version)",
+      "Bash(tail:*)",
+      "Glob(**)",
+      "Read(**)",
+      "WebFetch(domain:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+
+}

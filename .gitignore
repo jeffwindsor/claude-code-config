@@ -22,8 +22,5 @@ plugins/
 statsig/
 ide/
 
-# Claude settings, include local just not this file yet
-settings.json
-
 # macOS
 .DS_Store
