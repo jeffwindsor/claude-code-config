@@ -45,7 +45,8 @@
       "Bash(tail:*)",
       "Glob(**)",
       "Read(**)",
-      "WebFetch(domain:*)"
+      "WebFetch(domain:*)",
+      "/tmp/**"
     ],
     "deny": [],
     "ask": []
