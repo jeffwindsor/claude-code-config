@@ -28,6 +28,7 @@
       "Bash(bat:*)",
       "Bash(bd:*)",
       "Bash(cat:*)",
+      "Bash(chmod +x *.sh:*)",
       "Bash(echo:*)",
       "Bash(fd:*)",
       "Bash(find:*)",

@@ -16,6 +16,7 @@ todos/
 aws_creds_cache.json
 stats-cache.json
 history.jsonl
+security_warnings_state_*.json
 
 # Plugins and external tools
 plugins/
