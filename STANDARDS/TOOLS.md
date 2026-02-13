@@ -1,12 +1,6 @@
-# Universal Tool Usage Standards (MANDATORY)
+# Universal Tool Usage Standards
 
-This file defines **non-optional** tool usage standards that apply to ALL projects. These preferences **override default Claude behavior**. Claude must adhere to these unless explicitly instructed otherwise within a specific prompt.
-
----
-
-## TOOL SELECTION STANDARDS
-
-### Core Principle
+## Core Principle
 
 **Use specialized tools instead of bash commands whenever possible**. Specialized tools provide:
 - Better error handling and validation
@@ -17,105 +11,74 @@ This file defines **non-optional** tool usage standards that apply to ALL projec
 
 ---
 
-## FILE OPERATIONS
+## Command Translation Guide (QUICK REFERENCE)
 
-### Reading Files
+| Bash Command | Use This Instead | Example |
+|--------------|------------------|---------|
+| `cat file.txt` | Read tool | `Read(file_path="file.txt")` |
+| `echo "content" > file` | Write tool | `Write(file_path="file", content="content")` |
+| `sed 's/old/new/' file` | Edit tool | `Edit(file_path="file", old_string="old", new_string="new")` |
+| `find . -name "*.java"` | Glob tool | `Glob(pattern="**/*.java")` |
+| `grep "pattern" file` | Grep tool | `Grep(pattern="pattern", path="file", output_mode="content")` |
+| `git status` | Bash tool | `Bash(command="git status")` ✓ ALLOWED |
+| `mvn clean install` | Bash tool | `Bash(command="mvn clean install")` ✓ ALLOWED |
+| `echo "message"` | Direct output | Just output text directly |
 
-**ALWAYS USE**: `Read` tool
-**NEVER USE**: `cat`, `head`, `tail`, `less`, `more`
+---
 
+## File Operations
+
+### Read
+**Use**: `Read` tool | **Never**: `cat`, `head`, `tail`, `less`, `more`
+- Supports line ranges (offset, limit), images, PDFs, Jupyter notebooks
+
+### Write
+**Use**: `Write` tool | **Never**: `echo >`, `cat > file <<EOF`, `printf >`, `tee`
+- Handles multiline content, validates paths, proper error handling
+
+### Edit
+**Use**: `Edit` tool | **Never**: `sed`, `awk`, `perl -pi`, `ex`
+- Exact string replacement, validates string exists, option for replace_all
+
+**Examples**:
 ```bash
 # ✗ WRONG
 cat src/main/java/MyClass.java
-head -n 20 config.properties
-tail -f application.log
-
-# ✓ CORRECT
-Read tool with file_path parameter
-- Supports line ranges (offset, limit)
-- Handles images, PDFs, Jupyter notebooks
-- Provides proper error handling
-```
-
-### Writing Files
-
-**ALWAYS USE**: `Write` tool
-**NEVER USE**: `echo >`, `cat > file <<EOF`, `printf >`, `tee`
-
-```bash
-# ✗ WRONG
 echo "content" > file.txt
-cat > config.yaml <<EOF
-key: value
-EOF
-
-# ✓ CORRECT
-Write tool with file_path and content parameters
-- Handles multiline content properly
-- Validates paths
-- Proper error handling
-```
-
-### Editing Files
-
-**ALWAYS USE**: `Edit` tool
-**NEVER USE**: `sed`, `awk`, `perl -pi`, `ex`
-
-```bash
-# ✗ WRONG
 sed -i 's/old/new/g' file.txt
-awk '{print $1}' file.txt
-perl -pi -e 's/pattern/replacement/' file.txt
 
 # ✓ CORRECT
-Edit tool with old_string and new_string parameters
-- Exact string replacement
-- Validation that string exists
-- Option for replace_all
+Read(file_path="src/main/java/MyClass.java")
+Write(file_path="file.txt", content="content")
+Edit(file_path="file.txt", old_string="old", new_string="new")
 ```
 
 ---
 
-## FILE DISCOVERY
+## File Discovery
 
-### Finding Files
+### Find Files
+**Use**: `Glob` tool | **Never**: `find`, `ls` (for pattern matching)
+- Supports glob patterns like `**/*.java`, fast for any codebase size, sorted results
 
-**ALWAYS USE**: `Glob` tool
-**NEVER USE**: `find`, `ls` (for pattern matching)
+### Search Contents
+**Use**: `Grep` tool | **Never**: `grep`, `rg`, `ag`, `ack`
+- Full regex support, output modes (content/files_with_matches/count), built on ripgrep
 
+**Examples**:
 ```bash
 # ✗ WRONG
 find . -name "*.java"
-ls src/**/*.properties
+grep -r "class MyService" src/
 
 # ✓ CORRECT
-Glob tool with pattern parameter
-- Supports glob patterns like "**/*.java"
-- Fast for any codebase size
-- Returns sorted results
-```
-
-### Searching File Contents
-
-**ALWAYS USE**: `Grep` tool
-**NEVER USE**: `grep`, `rg`, `ag`, `ack`
-
-```bash
-# ✗ WRONG
-grep -r "pattern" src/
-rg "class.*Test" --type java
-
-# ✓ CORRECT
-Grep tool with pattern parameter
-- Full regex support
-- Output modes: content, files_with_matches, count
-- Supports -A/-B/-C context
-- Built on ripgrep (optimized)
+Glob(pattern="**/*.java")
+Grep(pattern="class MyService", path="src/", output_mode="files_with_matches")
 ```
 
 ---
 
-## WHEN TO USE BASH
+## When to Use Bash
 
 ### Allowed Bash Use Cases
 
@@ -142,7 +105,7 @@ Bash tool is **ONLY** for:
 
 ---
 
-## COMPLEX OPERATIONS
+## Complex Operations
 
 ### Open-Ended Search/Research
 
@@ -172,22 +135,7 @@ Task tool with subagent_type=Explore
 
 ---
 
-## COMMAND TRANSLATION GUIDE
-
-| Bash Command | Use This Instead | Example |
-|--------------|------------------|---------|
-| `cat file.txt` | Read tool | `Read(file_path="file.txt")` |
-| `echo "content" > file` | Write tool | `Write(file_path="file", content="content")` |
-| `sed 's/old/new/' file` | Edit tool | `Edit(file_path="file", old_string="old", new_string="new")` |
-| `find . -name "*.java"` | Glob tool | `Glob(pattern="**/*.java")` |
-| `grep "pattern" file` | Grep tool | `Grep(pattern="pattern", path="file", output_mode="content")` |
-| `git status` | Bash tool | `Bash(command="git status")` ✓ ALLOWED |
-| `mvn clean install` | Bash tool | `Bash(command="mvn clean install")` ✓ ALLOWED |
-| `echo "message"` | Direct output | Just output text directly |
-
----
-
-## COMMUNICATION STANDARDS
+## Communication Standards
 
 ### Never Use Echo for User Communication
 
@@ -213,7 +161,7 @@ Output all explanations, status updates, and messages **directly as text**. Only
 
 ---
 
-## PARALLEL OPERATIONS
+## Parallel Operations
 
 ### When to Call Multiple Tools in One Response
 
@@ -237,7 +185,7 @@ Read(file_path="pom.xml")
 
 ---
 
-## TOOL USAGE CHECKLIST
+## Tool Usage Checklist
 
 Before using Bash, ask:
 - [ ] Is this for git operations? → Use Bash ✓
@@ -253,127 +201,7 @@ Before using Bash, ask:
 
 ---
 
-## EXAMPLES OF CORRECT TOOL USAGE
-
-### Example 1: Creating a New Java Class
-
-**WRONG**:
-```bash
-cat > src/main/java/MyClass.java <<EOF
-public class MyClass {
-    // implementation
-}
-EOF
-```
-
-**CORRECT**:
-```
-Write tool:
-file_path: src/main/java/MyClass.java
-content: public class MyClass {
-    // implementation
-}
-```
-
-### Example 2: Updating Configuration
-
-**WRONG**:
-```bash
-sed -i 's/port=8080/port=9090/' application.properties
-```
-
-**CORRECT**:
-```
-Edit tool:
-file_path: application.properties
-old_string: port=8080
-new_string: port=9090
-```
-
-### Example 3: Finding Test Files
-
-**WRONG**:
-```bash
-find src/test -name "*Test.java"
-```
-
-**CORRECT**:
-```
-Glob tool:
-pattern: src/test/**/*Test.java
-```
-
-### Example 4: Searching for a Class Definition
-
-**WRONG**:
-```bash
-grep -r "class MyService" src/
-```
-
-**CORRECT**:
-```
-Grep tool:
-pattern: class MyService
-path: src/
-output_mode: files_with_matches
-```
-
-### Example 5: Complex Search (Use Agent)
-
-**WRONG**:
-```bash
-# Multiple grep attempts trying different patterns
-grep -r "error" src/
-grep -r "exception" src/
-grep -r "failure" src/
-```
-
-**CORRECT**:
-```
-Task tool:
-subagent_type: Explore
-prompt: Find all error handling code in the src/ directory
-```
-
----
-
-## PERFORMANCE CONSIDERATIONS
-
-### Why Specialized Tools Are Better
-
-1. **Read tool** vs `cat`:
-   - Handles large files with offset/limit
-   - Supports images and PDFs
-   - Automatic line numbering
-   - Better error messages
-
-2. **Write tool** vs `echo >`:
-   - Validates directory exists
-   - Handles special characters properly
-   - Atomic writes (safer)
-   - Clear error reporting
-
-3. **Edit tool** vs `sed`:
-   - Validates old_string exists (prevents silent failures)
-   - Exact string matching (no regex ambiguity)
-   - Can target specific occurrences
-   - Better for reviewability
-
-4. **Glob tool** vs `find`:
-   - Optimized for speed
-   - Consistent cross-platform behavior
-   - Sorted output
-   - No shell escaping issues
-
-5. **Grep tool** vs `grep`:
-   - Built on ripgrep (extremely fast)
-   - Multiple output modes
-   - Context support
-   - File type filtering
-
----
-
-## EXCEPTION HANDLING
+## Exception Handling
 
 ### When Bash IS Appropriate Even for File Operations
 
@@ -396,11 +224,3 @@ prompt: Find all error handling code in the src/ directory
    ```
 
 But even then, prefer specialized tools when possible!
-
----
-
-## CLAUDE MUST FOLLOW THESE PREFERENCES
-
-These tool usage standards override general best practices. **Do not use bash commands for file operations** unless explicitly instructed per project or there's a compelling technical reason.
-
-**Permission prompts are a signal**: If Claude Code asks for permission to run a bash command, it's usually a sign you should be using a specialized tool instead.

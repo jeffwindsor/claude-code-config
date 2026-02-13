@@ -1,8 +1,4 @@
-# Universal Coding Standards (MANDATORY)
-
-This file defines **non-optional** coding standards that apply to ALL projects. These preferences **override default Claude behavior**. Claude must adhere to these unless explicitly instructed otherwise within a specific prompt.
-
----
+# Universal Coding Standards
 
 ## CODE STYLE STANDARDS
 
@@ -35,9 +31,3 @@ This file defines **non-optional** coding standards that apply to ALL projects. 
 - Comments should explain **why**, not **what**
 - Public APIs must include JavaDoc
 - Keep documentation close to the relevant code
-
----
-
-## CLAUDE MUST FOLLOW THESE PREFERENCES
-
-These coding standards override general best practices. **Do not suggest or apply alternate conventions** unless explicitly instructed per project or file.

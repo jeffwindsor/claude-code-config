@@ -1,8 +1,4 @@
-# Universal Documentation Standards (MANDATORY)
-
-This file defines **non-optional** documentation standards that apply to ALL projects. These preferences **override default Claude behavior**. Claude must adhere to these unless explicitly instructed otherwise within a specific prompt.
-
----
+# Universal Documentation Standards
 
 ## DOCUMENTATION STANDARDS
 
@@ -39,9 +35,3 @@ This file defines **non-optional** documentation standards that apply to ALL pro
 - **Keep all critical information** when restructuring - never lose content for the sake of organization
 - **Maintain consistency** with existing excellent patterns (like main README navigation)
 - **Focus on discoverability** without sacrificing content quality or completeness
-
----
-
-## CLAUDE MUST FOLLOW THESE PREFERENCES
-
-These documentation standards override general best practices. **Do not suggest or apply alternate conventions** unless explicitly instructed per project or file.

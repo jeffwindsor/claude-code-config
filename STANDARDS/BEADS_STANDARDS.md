@@ -1,8 +1,4 @@
-# Universal Beads Workflow Standards (MANDATORY)
-
-This file defines **non-optional** beads workflow standards that apply to ALL projects using beads. These preferences **override default Claude behavior**. Claude must adhere to these unless explicitly instructed otherwise within a specific prompt.
-
----
+# Universal Beads Workflow Standards
 
 ## BEADS WORKFLOW STANDARDS
 
@@ -124,18 +120,9 @@ If you observe any of these, pause and perform impact review:
 - **Prevent divergence** between what was decided and what beads track
 - **When creating initial beads from a plan**, link them to the decision bead as blockers so you're forced to review them when the decision is made
 
-**Anti-patterns to avoid:**
-- ✗ Closing decision bead immediately without impact review
-- ✗ Creating one new bead but missing others the decision requires
-- ✗ Assuming existing beads are still valid without verification
-- ✗ Not updating priorities when decision changes importance
-- ✗ Forgetting to adjust dependencies when workflow changes
+**Anti-patterns**: Closing decision without review | Creating one bead but missing others | Assuming beads still valid | Not updating priorities | Forgetting dependencies
 
-**Correct patterns:**
-- ✓ Decision → Full impact review → Update all affected beads → Close decision
-- ✓ Treat decision beads as checkpoints that force plan review
-- ✓ Ask "What else?" after creating obvious new beads
-- ✓ Verify ready tasks make sense as next steps
+**Correct patterns**: Decision → Review → Update beads → Close | Treat decisions as checkpoints | Ask "What else?" | Verify ready tasks
 
 ---
 
@@ -175,9 +162,3 @@ This project doc is **optional** - the global standard above is sufficient for a
 - Multiple people work with the beads
 - Workflow patterns specific to this project emerge
 - You want to document specific anti-patterns encountered
-
----
-
-## CLAUDE MUST FOLLOW THESE PREFERENCES
-
-These beads workflow standards override general best practices. **Do not skip the decision impact review process** unless explicitly instructed per project or file.

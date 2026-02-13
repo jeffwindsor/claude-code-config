@@ -1,8 +1,4 @@
-# Universal Testing Standards (MANDATORY)
-
-This file defines **non-optional** testing standards that apply to ALL projects. These preferences **override default Claude behavior**. Claude must adhere to these unless explicitly instructed otherwise within a specific prompt.
-
----
+# Universal Testing Standards
 
 ## TESTING STANDARDS
 
@@ -61,44 +57,21 @@ This file defines **non-optional** testing standards that apply to ALL projects.
 
 ### Test-Driven Development (TDD) Process
 
-**RED-GREEN-REFACTOR cycle definitions:**
+**TDD States:**
+- **RED (Proper)**: Code compiles, tests run but fail, production code has stub implementation
+- **RED (Improper)**: Compilation errors, missing structure, tests cannot execute
+- **GREEN**: Code compiles, tests pass, production code implements actual logic
 
-**RED State (Proper)**:
-- All code **compiles successfully** (no compilation errors)
-- Test code and production code structure exists with correct signatures
-- Tests **run but fail** with assertion errors
-- Production code has minimal/stub implementation that returns wrong values
-- This proves the test is actually testing something
+**TDD Workflow (ONE TEST AT A TIME):**
+1. Write ONE test → Create minimal structure (proper RED)
+2. STOP - User confirms RED
+3. Implement minimal code for ONLY this test (GREEN)
+4. STOP - User confirms GREEN
+5. Provide commit message
+6. STOP - Wait for commit confirmation
+7. Refactor if needed, repeat
 
-**RED State (Improper - Do Not Create)**:
-- Compilation errors
-- Missing classes, methods, or imports
-- Tests cannot execute
-
-**GREEN State**:
-- All code compiles successfully
-- Tests run and **pass** with correct assertions
-- Production code implements the actual logic to satisfy requirements
-- No test failures
-
-**TDD Workflow (MANDATORY - ONE TEST AT A TIME)**:
-
-1. **Write ONE test** (may have compilation errors initially)
-2. **Create minimal structure** so everything compiles (proper RED state)
-3. **STOP - User runs tests** and confirms RED state
-4. **Implement minimal production code** to make ONLY this one test pass (GREEN state)
-5. **STOP - User runs tests** and confirms GREEN state
-6. **Provide commit message and description** for this one test cycle
-7. **STOP - Wait for user confirmation** of commit before proceeding
-8. **Refactor if needed** while keeping tests GREEN (optional)
-9. **Repeat from step 1** for the next test
-
-**Critical TDD Rules**:
-- **NEVER write multiple tests at once** - always one test at a time
-- **NEVER implement code before user confirms RED** - must see failing test first
-- **NEVER move to next test before user confirms commit** - each test gets its own commit
-- **User controls the pace** - Claude waits for explicit confirmation at each step
-- **Commit after every GREEN** - maintains clean history and rollback points
+**Critical Rules**: Never write multiple tests at once | Never implement before RED confirmed | Never proceed before commit confirmed | User controls pace | Commit after every GREEN
 
 **Commit Message Format**:
 ```
@@ -109,8 +82,10 @@ test: add test for [specific behavior]
 - Scenario: [which scenario this supports]
 ```
 
----
+### Project-Specific TDD Workflows
 
-## CLAUDE MUST FOLLOW THESE PREFERENCES
+Some projects may define detailed multi-agent TDD workflows. Check for:
+- **docs/TDD_WORKFLOW.md** - Project-specific TDD process (e.g., 3-agent cross-validation)
+- **AGENTS.md** - Agent roles and workflow guidance
 
-These testing standards override general best practices. **Do not suggest or apply alternate conventions** unless explicitly instructed per project or file.
+When these exist, they **override/extend** the general TDD standards above.

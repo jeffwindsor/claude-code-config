@@ -11,6 +11,7 @@ session-env/
 shell-snapshots/
 tasks/
 todos/
+usage-data/
 
 # Sensitive data
 aws_creds_cache.json
