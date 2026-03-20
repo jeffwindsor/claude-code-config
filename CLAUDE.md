@@ -16,6 +16,15 @@ All standards in `~/.claude/STANDARDS/` are **non-optional** and **override defa
    - BEADS_STANDARDS.md - Beads workflow and decision management
    - SPRING_BOOT_STANDARDS.md - Spring Boot configuration (when applicable)
 
+## Git Workflow
+
+**NEVER automatically commit or push code.** Always ask for explicit permission before:
+- Running `git commit`
+- Running `git push`
+- Creating or merging branches destructively
+
+Show diffs and get user approval first. Let the user decide when work is ready.
+
 ## Universal Standards
 
 @STANDARDS/TOOLS.md

@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pbcopy echo \"Copied to clipboard\")",
+      "WebSearch",
+      "WebFetch(domain:github.github.com)",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}

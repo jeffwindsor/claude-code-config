@@ -1,10 +1,13 @@
 {
+  "env": {
+    "ANTHROPIC_API_KEY": "sk-EXJ7bXD0WZJ4KYDo_JyLow",
+    "ANTHROPIC_BASE_URL": "https://litellm-proxy.lab.cj.com",
+    "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "true"
+  },
   "permissions": {
     "allow": [
       "Bash(bat:*)",
-      "Bash(bd:*)",
       "Bash(cat:*)",
-      "Bash(chmod +x *.sh:*)",
       "Bash(echo:*)",
       "Bash(fd:*)",
       "Bash(find:*)",
@@ -12,23 +15,21 @@
       "Bash(git log:*)",
       "Bash(git show:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)",
       "Bash(grep:*)",
       "Bash(head:*)",
       "Bash(ls:*)",
       "Bash(mvn:*)",
       "Bash(rg:*)",
       "Bash(sed:*)",
-      "Bash(specify check:*)",
-      "Bash(specify version)",
       "Bash(tail:*)",
-      "Glob(**)",
-      "Read(**)",
-      "WebFetch(domain:*)",
-      "/tmp/**"
+      "Read(**)"
     ],
-    "deny": [],
-    "ask": []
+    "deny": [
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
+    ],
+    "ask": [],
+    "defaultMode": "plan"
   },
   "hooks": {
     "Notification": [
@@ -43,16 +44,22 @@
       }
     ]
   },
+  "statusLine": {
+    "type": "command",
+    "command": "printf \"$(pwd | xargs basename) | \" && bun x ccusage statusline",
+    "padding": 0
+  },
   "enabledPlugins": {
+    "code-review@claude-plugins-official": true,
+    "code-simplifier@claude-plugins-official": true,
     "context7@claude-plugins-official": true,
     "feature-dev@claude-plugins-official": true,
-    "code-review@claude-plugins-official": true,
-    "security-guidance@claude-plugins-official": true,
-    "greptile@claude-plugins-official": true,
+    "hookify@claude-plugins-official": true,
     "jdtls-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
     "pyright-lsp@claude-plugins-official": true,
-    "beads@beads-marketplace": true
-  },
-  "skipDangerousModePermissionPrompt": true
+    "security-guidance@claude-plugins-official": true,
+    "skill-creator@claude-plugins-official": true,
+    "superpowers@claude-plugins-official": true
+  }
 }
