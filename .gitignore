@@ -12,6 +12,8 @@ shell-snapshots/
 tasks/
 todos/
 usage-data/
+sessions/
+telemetry/
 
 # Sensitive data
 aws_creds_cache.json

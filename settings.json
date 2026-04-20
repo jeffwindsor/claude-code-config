@@ -2,6 +2,7 @@
   "env": {
     "ANTHROPIC_API_KEY": "sk-EXJ7bXD0WZJ4KYDo_JyLow",
     "ANTHROPIC_BASE_URL": "https://litellm-proxy.lab.cj.com",
+    "ANTHROPIC_MODEL": "claude-haiku-4-5-20251001",
     "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "true"
   },
   "permissions": {
@@ -31,6 +32,7 @@
     "ask": [],
     "defaultMode": "plan"
   },
+  "model": "haiku",
   "hooks": {
     "Notification": [
       {
@@ -60,6 +62,16 @@
     "pyright-lsp@claude-plugins-official": true,
     "security-guidance@claude-plugins-official": true,
     "skill-creator@claude-plugins-official": true,
-    "superpowers@claude-plugins-official": true
-  }
+    "superpowers@claude-plugins-official": true,
+    "engexp@engexp-marketplace": true
+  },
+  "extraKnownMarketplaces": {
+    "engexp-marketplace": {
+      "source": {
+        "source": "git",
+        "url": "git@gitlab.cj.dev:architects/engexp-claude.git"
+      }
+    }
+  },
+  "effortLevel": "xhigh"
 }
